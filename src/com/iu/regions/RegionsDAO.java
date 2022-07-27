@@ -13,6 +13,7 @@ public class RegionsDAO {
 	public RegionsDTO getDetail(int region_id) throws Exception {
 		RegionsDTO regionsDTO = null;
 		ArrayList<RegionsDTO> ar = new ArrayList<>();
+		
 		Connection con = DBConnector.getConnection();
 		String sql = "SELECT * FROM REGIONS WHERE REGION_ID=?"; //값으로 들어가야 할 곳을 물음표로 처리 (보안때문)
 		PreparedStatement st = con.prepareStatement(sql);
