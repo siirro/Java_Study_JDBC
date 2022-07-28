@@ -9,6 +9,31 @@ import com.iu.util.DBConnector;
 
 public class EmployeesDAO {
 	
+	public void getSalaryInfo() throws Exception{
+		
+		//디비연결, 쿼리문작성, 미리전송, 물음표설정, 최종전송, 결과처리, 자원해제
+		Connection con = DBConnector.getConnection();
+		String sql = "SELECT SUM(SALARY), AVG(SALARY), MAX(SALARY) AS MAX FROM EMPLOYEES"; //쿼리문 안에 세미콜론찍지않는다. 알아서찍어준다.
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		//최종전송
+		ResultSet rs = st.executeQuery();
+		//ArrayList<Object> 
+		//결과처리
+		if(rs.next()) {
+			
+			int sum = rs.getInt("SUM(SALARY)");
+			double avg = rs.getDouble(2);
+			int max = rs.getInt("MAX");
+			System.out.println(sum);
+			System.out.println(avg);
+			System.out.println(max);
+		}
+		
+		
+		DBConnector.disconnect(rs, st, con);
+	}
+	
 	public ArrayList<EmployeesDTO> getList() throws Exception {
 		EmployeesDTO ed = null;
 		ArrayList<EmployeesDTO> ar = new ArrayList();

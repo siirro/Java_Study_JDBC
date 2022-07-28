@@ -24,8 +24,8 @@ public class TestMain {
 		EmployeesView ev = new EmployeesView();
 		
 		try {
-			//ArrayList<RegionsDTO> ar = regionsDAO.getList();
-			//rv.viewAll(ar);
+			ArrayList<RegionsDTO> ar = regionsDAO.getList();
+			rv.viewAll(ar);
 			
 			//ArrayList<CountriesDTO> aa = countriesDAO.getList();
 			//cv.viewAll(aa);
@@ -41,8 +41,38 @@ public class TestMain {
 			//ArrayList<EmployeesDTO> aaa = ed.getList();
 			//ev.view(aaa);
 			
-			EmployeesDTO eee = ed.getDetail(102);
-			ev.view(eee);
+			//EmployeesDTO eee = ed.getDetail(102);
+			//ev.view(eee);
+			
+			//ed.getSalaryInfo();
+			
+			//디비에 인서트 하는거 실행하기
+			RegionsDTO regionsDTO = new RegionsDTO();
+			regionsDTO.setRegion_id(6);
+			regionsDTO.setRegion_name("Mars");
+			int result = regionsDAO.setRegion(regionsDTO);
+			
+			if(result > 0 ) {
+					System.out.println("성공");
+			}else {
+				System.out.println("실패");
+			}
+			
+			
+			//컨트리에 인서트하기
+			/*CountriesDTO cdto = new CountriesDTO();
+			cdto.setCountry_id("PR");
+			cdto.setCountry_name("푸랑이");
+			cdto.setRegion_id(4);
+			int result2 = countriesDAO.setCountry(cdto);
+			
+			if(result2 > 0) {
+				System.out.println("컨트리인서트 성공");
+			} else {
+				System.out.println("컨트리인서트 실패");
+			}
+			*/
+			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
