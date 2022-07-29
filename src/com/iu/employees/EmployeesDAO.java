@@ -9,6 +9,42 @@ import com.iu.util.DBConnector;
 
 public class EmployeesDAO {
 	
+	public void getJoinTest(EmployeesDTO employeesdto)throws Exception {
+		//디비연결 쿼리문생성 미리전송 물음표세팅 최종전송 결과처리 자원해제
+		Connection con = DBConnector.getConnection();
+		
+		String sql = "SELECT E.LAST_NAME, E.SALARY, D.DEPARTMENT_NAME "
+				+ "FROM EMPLOYEES E "
+				+ "        INNER JOIN "
+				+ "        DEPARTMENTS D "
+				+ "        ON E.DEPARTMENT_ID = D.DEPARTMENT_ID "
+				+ "WHERE E.EMPLOYEE_ID=?;";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setInt(1, employeesdto.getEmployee_id());
+		
+		
+		
+		
+		
+		ResultSet rs = st.executeQuery();
+		//인서트 업데이트 딜리트는 결과를 성공1 실패0 으로 받고 나머지는 아님
+		
+		if(rs.next()) {
+			employeesdto = new EmployeesDTO();
+			employeesdto.setLast_name(rs.getString(1));
+			employeesdto.setSalary(rs.getInt(2));
+			
+			DepartmentsDTO dt = new DepartmentsDTO();
+			dt.setDepartment_name(rs.getString(3));
+			
+		}
+		
+		DBConnector.disconnect(rs, st, con);
+		
+		
+	}
+	
+	
 	public void getSalaryInfo() throws Exception{
 		
 		//디비연결, 쿼리문작성, 미리전송, 물음표설정, 최종전송, 결과처리, 자원해제
