@@ -34,8 +34,8 @@ public class EmployeesDAO {
 			employeesdto.setLast_name(rs.getString(1));
 			employeesdto.setSalary(rs.getInt(2));
 			
-			DepartmentsDTO dt = new DepartmentsDTO();
-			dt.setDepartment_name(rs.getString(3));
+			//DepartmentsDTO dt = new DepartmentsDTO();
+			//dt.setDepartment_name(rs.getString(3));
 			
 		}
 		
